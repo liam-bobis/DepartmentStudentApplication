@@ -8,12 +8,38 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Room</th>
+        <th>Timeslot</th>
       </tr>
     </thead>
     <tbody>
       <% @subject.sections.each do |section| %>
         <tr>
           <td><%= section.name %></td>
+          <td><%= section.room %></td>
+          <td><%= section.timeslot %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @subject.teachers.any? %>
+  <h3>Teacher:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Specialization</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subject.teachers.each do |teacher| %>
+        <tr>
+          <td><%= teacher.name %></td>
+          <td><%= teacher.email %></td>
+          <td><%= teacher.specialization %></td>
         </tr>
       <% end %>
     </tbody>

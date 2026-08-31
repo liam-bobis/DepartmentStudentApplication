@@ -1,6 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @section %>
+<% if @section.classlists.any? %>
+  <h3>List of Classlists:</h3>
+  <table>
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <% @section.classlists.each do |classlist| %>
+        <tr>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <div>
   <%= link_to "Edit this section", edit_section_path(@section) %> |
