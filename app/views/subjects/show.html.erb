@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @subject %>
+
+<% if @subject.section.any? %>
+  <h3>List of Sections:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subject.sections.each do |section| %>
+        <tr>
+          <td><%= section.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div>
+  <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
+  <%= link_to "Back to subjects", subjects_path %>
+
+  <%= button_to "Destroy this subject", @subject, method: :delete %>
+</div>

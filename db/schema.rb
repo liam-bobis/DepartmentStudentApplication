@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_24_163256) do
+ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
+  create_table "classlists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "section_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_classlists_on_section_id"
+    t.index ["student_id"], name: "index_classlists_on_student_id"
+  end
+
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -27,6 +36,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_24_163256) do
     t.index ["department_id"], name: "index_laboratories_on_department_id"
   end
 
+  create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "room"
+    t.string "timeslot"
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_sections_on_subject_id"
+  end
+
   create_table "students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.integer "year_level"
@@ -35,6 +54,14 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_24_163256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_students_on_department_id"
+  end
+
+  create_table "subjects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_subjects_on_teacher_id"
   end
 
   create_table "teachers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -47,7 +74,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_24_163256) do
     t.index ["department_id"], name: "index_teachers_on_department_id"
   end
 
+  add_foreign_key "classlists", "sections"
+  add_foreign_key "classlists", "students"
   add_foreign_key "laboratories", "departments"
+  add_foreign_key "sections", "subjects"
   add_foreign_key "students", "departments"
+  add_foreign_key "subjects", "teachers"
   add_foreign_key "teachers", "departments"
 end
