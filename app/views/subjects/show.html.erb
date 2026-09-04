@@ -2,48 +2,32 @@
 
 <%= render @subject %>
 
-<% if @subject.section.any? %>
-  <h3>List of Sections:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Room</th>
-        <th>Timeslot</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @subject.sections.each do |section| %>
+<% if @subject.sections.any? %>
+  <h2>Sections</h2>
+  <% @subject.sections.each do |section| %>
+    <h3><%= section.name %></h3>
+    <p>
+      <%= "Room: #{section.room} | Timeslot: #{section.timeslot} | Teacher: #{section.subject.teacher.name}" %>
+    </p>
+    <table>
+      <thead>
         <tr>
-          <td><%= section.name %></td>
-          <td><%= section.room %></td>
-          <td><%= section.timeslot %></td>
+          <th>Name</th>
+          <th>Year Level</th>
+          <th>Program</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<% if @subject.teachers.any? %>
-  <h3>Teacher:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Specialization</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @subject.teachers.each do |teacher| %>
-        <tr>
-          <td><%= teacher.name %></td>
-          <td><%= teacher.email %></td>
-          <td><%= teacher.specialization %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% section.students.each do |student| %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.year_level  %></td>
+            <td><%= student.program  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
 
 <div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_04_190239) do
   create_table "classlists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "section_id", null: false
@@ -25,6 +25,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "studentCount"
+    t.integer "teachersCount"
+    t.integer "laboratory"
+    t.integer "studentsCount"
   end
 
   create_table "laboratories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -43,6 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
     t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "studentsCount"
     t.index ["subject_id"], name: "index_sections_on_subject_id"
   end
 
@@ -53,6 +58,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "tuitionFee", precision: 10
+    t.integer "subjectsCount"
+    t.integer "numberOfUnits"
     t.index ["department_id"], name: "index_students_on_department_id"
   end
 
@@ -61,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
     t.bigint "teacher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sectionCount"
     t.index ["teacher_id"], name: "index_subjects_on_teacher_id"
   end
 
@@ -71,6 +80,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_31_152545) do
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "monthlySalary", precision: 10
+    t.decimal "perUnitRate", precision: 10
     t.index ["department_id"], name: "index_teachers_on_department_id"
   end
 
