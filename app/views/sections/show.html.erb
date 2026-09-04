@@ -1,16 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @section %>
-<% if @section.classlists.any? %>
-  <h3>List of Classlists:</h3>
+
+<% if @section.students.any? %>
+  <h3>List of Students:</h3>
   <table>
     <thead>
       <tr>
+        <th>Name</th>
+        <th>Year Level</th>
+        <th>Program</th>
       </tr>
     </thead>
     <tbody>
-      <% @section.classlists.each do |classlist| %>
+      <% @section.students.each do |student| %>
         <tr>
+          <td><%= student.name %></td>
+          <td><%= student.year_level %></td>
+          <td><%= student.program %></td>
         </tr>
       <% end %>
     </tbody>

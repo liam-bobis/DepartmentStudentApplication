@@ -4,6 +4,8 @@ class CreateTeachers < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :email
       t.string :specialization
+      t.double :monthlySalary
+      t.double :perUnitRate
       t.references :department, null: false, foreign_key: true
 
       t.timestamps
